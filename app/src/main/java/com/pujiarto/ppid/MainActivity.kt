@@ -49,6 +49,7 @@ fun MyApp() {
 @Composable
 fun SearchScreen(onContinueClicked: () -> Unit){
     var searchDocument by remember { mutableStateOf("doc")}
+
     Surface{
         Column(
             modifier = Modifier.fillMaxSize(),
