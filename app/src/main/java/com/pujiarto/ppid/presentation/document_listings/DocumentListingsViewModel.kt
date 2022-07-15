@@ -28,7 +28,7 @@ class DocumentListingsViewModel @Inject constructor(
 
     fun onEvent(event: DocumentListingsEvent) {
         when(event) {
-            if DocumentListingsEvent.Refresh -> {
+            is DocumentListingsEvent.Refresh -> {
                 getDocumentListings(fetchFromRemote = true)
             }
             is DocumentListingsEvent.OnSearchQueryChange -> {
@@ -47,16 +47,19 @@ class DocumentListingsViewModel @Inject constructor(
         fetchFromRemote: Boolean = false
     ) {
         viewModelScope.launch {
-            repository
-                .getCompanyListings(fetchFromRemote, query)
+            repository.getDocumentListings(fetchFromRemote, query)
                 .collect { result ->
-                    when(result){
+                    when(result) {
                         is Resource.Success -> {
                             result.data?.let { listings ->
                                 state = state.copy(
                                     documents = listings
                                 )
                             }
+                        }
+                        is Resource.Error -> Unit
+                        is Resource.Loading -> {
+                            state = state.copy(isLoading = result.isLoading)
                         }
                     }
                 }
