@@ -9,8 +9,8 @@ import androidx.compose.ui.graphics.Color
 
 private val DarkColorPalette = darkColors(
     surface = Blue,
-    onSurface = Navy,
-    primary = Navy,
+    onSurface = Blue,
+    primary = LightBlue,
     onPrimary = Chartreuse
 )
 

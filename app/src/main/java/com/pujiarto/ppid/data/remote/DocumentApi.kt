@@ -12,7 +12,7 @@ interface DocumentApi {
     ): ResponseBody
 
     companion object {
-        const val API_KEY = "api/Data"
+        const val API_KEY = "/api/Data/"
         const val BASE_URL = "https://ppidlobarnew.pythonanywhere.com"
     }
 }
