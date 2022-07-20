@@ -1,7 +1,7 @@
 package com.pujiarto.ppid.di
 
-import com.pujiarto.ppid.data.csv.CSVParser
-import com.pujiarto.ppid.data.csv.DocumentListingsParser
+//import com.pujiarto.ppid.data.csv.CSVParser
+//import com.pujiarto.ppid.data.csv.DocumentListingsParser
 import com.pujiarto.ppid.data.repository.DocumentRepositoryImpl
 import com.pujiarto.ppid.domain.model.DocumentListing
 import com.pujiarto.ppid.domain.repository.DocumentRepository
@@ -15,11 +15,11 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 abstract class RepositoryModule {
 
-    @Binds
-    @Singleton
-    abstract fun bindDocumentListingsParser(
-        documentListingsParser: DocumentListingsParser
-    ): CSVParser<DocumentListing>
+//    @Binds
+//    @Singleton
+//    abstract fun bindDocumentListingsParser(
+//        documentListingsParser: DocumentListingsParser
+//    ): CSVParser<DocumentListing>
 
     @Binds
     @Singleton

@@ -1,6 +1,5 @@
 package com.pujiarto.ppid.data.repository
 
-import com.pujiarto.ppid.data.csv.CSVParser
 import com.pujiarto.ppid.data.local.DocumentDatabase
 import com.pujiarto.ppid.data.mapper.toDocumentListing
 import com.pujiarto.ppid.data.mapper.toDocumentListingEntity
@@ -10,6 +9,7 @@ import com.pujiarto.ppid.domain.repository.DocumentRepository
 import com.pujiarto.ppid.util.Resource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import retrofit2.Callback
 import retrofit2.HttpException
 import java.io.IOException
 import javax.inject.Inject
@@ -19,7 +19,6 @@ import javax.inject.Singleton
 class DocumentRepositoryImpl @Inject constructor(
     val api: DocumentApi,
     val db: DocumentDatabase,
-    val documentListingsParser: CSVParser<DocumentListing>
 ): DocumentRepository  {
 
     private val dao = db.dao
@@ -43,7 +42,7 @@ class DocumentRepositoryImpl @Inject constructor(
             }
             val remoteListings = try {
                 val response = api.getListings()
-                documentListingsParser.parse(response.byteStream())
+                Resource.Success(data = response.body())
             } catch (e: IOException ){
                 e.printStackTrace()
                 emit(Resource.Error("Couldn't load PPID data"))
@@ -56,7 +55,7 @@ class DocumentRepositoryImpl @Inject constructor(
             remoteListings?.let { listings ->
                 dao.clearDocumentListings()
                 dao.insertDocumentListings(
-                    listings.map { it.toDocumentListingEntity() }
+                    
                 )
                 emit(Resource.Success(
                     data = dao

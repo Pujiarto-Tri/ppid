@@ -4,8 +4,10 @@
     package="com.pujiarto.ppid">
 
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
+        android:usesCleartextTraffic="true"
         android:name=".DocumentApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
